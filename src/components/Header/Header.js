@@ -1,6 +1,5 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { selectModalOpen } from '../../redux/application/application.selectors'
+import { useDispatch } from 'react-redux'
 import { toggleModal } from '../../redux/application/application.actions'
 import { AppBar, Toolbar, Typography, Button } from '@mui/material'
 import { makeStyles } from '@mui/styles'
@@ -32,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles()
-  const modalOpen = useSelector(selectModalOpen)
   const dispatch = useDispatch()
 
   const handleButtonClick = (evt) => {

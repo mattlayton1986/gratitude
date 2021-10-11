@@ -1,9 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { List, ListSubheader } from '@mui/material'
 import GratitudeItem from '../GratitudeItem/GratitudeItem'
+import { selectAllItemsAsArray } from '../../redux/gratitude/items/items.selectors'
 import { makeStyles } from '@mui/styles'
-import { useSelector } from 'react-redux';
-import { selectGratitudeList } from '../../redux/gratitude/gratitude.selectors'
+
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -24,12 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const GratitudeList = () => {
+const GratitudeList = ({ category, children }) => {
   const classes = useStyles() 
-  const gratitudeList = useSelector(selectGratitudeList)
+  const itemsArray = useSelector(selectAllItemsAsArray)
+  const itemsInCategory = itemsArray.filter(item => item.category === category.category).reverse()
 
   return (
     <List 
+      id={category.id}
       className={classes.list} 
       sx={{ margin: '0 auto' }}
       subheader={
@@ -39,7 +42,7 @@ const GratitudeList = () => {
       }
     >
       {
-        gratitudeList.map(item => (
+        itemsInCategory.map(item => (
           <GratitudeItem key={item.id} item={item} />
         ))
       }

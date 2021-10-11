@@ -1,5 +1,7 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { ListItem, ListItemText, Box, Checkbox } from '@mui/material'
+import { toggleItemComplete } from '../../redux/gratitude/items/items.actions';
 import { 
   StarRounded as StarRoundedIcon, 
   StarBorderRounded as StarBorderRoundedIcon 
@@ -35,6 +37,11 @@ const personBoxStyles = {
 
 const GratitudeItem = ({ item }) => {
   const classes = useStyles()
+  const dispatch = useDispatch()
+
+  const handleToggleCheckbox = (itemId) => {
+    dispatch(toggleItemComplete(itemId))
+  }
 
   return (
     <ListItem 
@@ -45,6 +52,8 @@ const GratitudeItem = ({ item }) => {
         <Checkbox 
           icon={<StarBorderRoundedIcon />}
           checkedIcon={<StarRoundedIcon />}
+          checked={item.completed}
+          onChange={() => handleToggleCheckbox(item.id)}
         />
         <ListItemText primary={item.person} />
       </Box>

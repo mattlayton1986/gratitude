@@ -1,9 +1,11 @@
 import React from 'react'
 import { TextField, Button, FormLabel } from '@mui/material'
 import CategoryField from '../CategoryField/CategoryField'
-import { useDispatch } from 'react-redux'
-import { toggleModal } from '../../redux/application/application.actions'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleModal, setTabValue } from '../../redux/application/application.actions'
 import { addGratitudeItem } from '../../redux/gratitude/gratitude.actions'
+import { selectAllCategories } from '../../redux/gratitude/categories/category.selectors'
+import uniqid from 'uniqid'
 import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 const GratitudeForm = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const categoryIds = useSelector(selectAllCategories)
   const [categoryValue, setCategoryValue] = React.useState(null)
   const [formData, setFormData] = React.useState({
     person: '',
@@ -87,8 +90,16 @@ const GratitudeForm = () => {
     dispatch(addGratitudeItem({
       person,
       gratitude,
-      category: categoryValue.title
+      category: categoryValue.title,
+      completed: false,
+      createdAt: Date.now(),
+      itemId: uniqid()
     }))
+
+    // Change active tab to the category of newly-submitted item
+    dispatch(setTabValue( 
+      categoryIds.indexOf(categoryValue.title.toLowerCase())
+    ))
 
     handleClose()
   }

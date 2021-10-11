@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectListsLength } from '../../redux/gratitude/gratitude.selectors'
+import { selectCategoriesLength } from '../../redux/gratitude/categories/category.selectors'
 import {Box, Container, Typography} from '@mui/material'
 import TabsMenu from '../TabsMenu/TabsMenu'
 import { makeStyles } from '@mui/styles'
@@ -43,11 +43,11 @@ const useStyles = makeStyles((theme) => ({
 
 const TabToolbar = () => {
   const classes = useStyles()
-  const listsLength = useSelector(selectListsLength)
+  const categoriesLength = useSelector(selectCategoriesLength)
   return (
     <Box sx={boxStyles}>
       {
-        listsLength === 0 ? (
+        categoriesLength === 0 ? (
           <Container maxWidth='xl' className={classes.container}>
             <Typography variant="h6">You haven't added any categories yet. Click here to get started!</Typography>
             <Pointer />

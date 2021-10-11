@@ -1,20 +1,11 @@
-import { ActionTypes } from "../types"
-import { addItemToList } from './gratitude.utils'
+import categoriesReducer from "./categories/categories.reducer";
+import listsReducer from "./lists/lists.reducer";
+import itemsReducer from './items/items.reducer'
+import { combineReducers } from "redux";
 
-const INITIAL_STATE = {
-  lists: []
-}
-
-const gratitudeReducer = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case ActionTypes.ADD_GRATITUDE_ITEM: 
-      return {
-        ...state,
-        lists: addItemToList(state.lists, action.payload)
-      }
-    default: 
-      return state
-  }
-}
+const gratitudeReducer = combineReducers({
+  categories: categoriesReducer,
+  items: itemsReducer
+})
 
 export default gratitudeReducer

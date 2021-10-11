@@ -1,8 +1,7 @@
 import React from 'react'
 import Header from './components/Header/Header'
-// import GratitudeList from './components/GratitudeList/GratitudeList';
+import ListsContainer from './components/ListsContainer/ListsContainer'
 import ModalDialog from './components/ModalDialog/ModalDialog';
-import TabToolbar from './components/TabToolbar/TabToolbar';
 import { useSelector } from 'react-redux';
 import { selectModalOpen } from './redux/application/application.selectors';
 import './App.scss';
@@ -14,8 +13,7 @@ const App = () => {
     <div className="gratitude-app">
       <Header />
       <main>
-        <TabToolbar />
-        {/* <GratitudeList /> */}
+        <ListsContainer />
       </main>
       <ModalDialog 
         open={modalOpen} 

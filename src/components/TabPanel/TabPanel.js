@@ -1,10 +1,18 @@
 import React from 'react'
 import { Container } from '@mui/material'
 
-const TabPanel = () => {
+const TabPanel = ({ children, value, index, ...otherProps }) => {
+
   return (
-    <Container>
-    
+    <Container 
+      role="tabpanel"
+      hidden={value !== index}
+      maxWidth="md"
+      {...otherProps}
+    >
+    {
+      value === index && children
+    }
     </Container>
   )
 }

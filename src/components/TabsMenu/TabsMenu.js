@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectLists } from '../../redux/gratitude/gratitude.selectors'
+import { selectCategoriesById } from '../../redux/gratitude/categories/category.selectors'
 import { selectTabValue } from '../../redux/application/application.selectors'
 import { setTabValue } from '../../redux/application/application.actions'
 import { Tabs, Tab } from '@mui/material'
@@ -20,14 +20,13 @@ const useStyles = makeStyles((theme) => ({
 const TabsMenu = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
-  const lists = useSelector(selectLists)
+  const categories = useSelector(selectCategoriesById)
   const tabValue = useSelector(selectTabValue)
 
   const handleChange = (evt, newValue) => {
     dispatch(setTabValue(newValue))
   }
 
-  console.log(tabValue)
   return (
     <Tabs
       className={classes.root}
@@ -37,8 +36,8 @@ const TabsMenu = () => {
       scrollButtons="auto"
     >
       {
-        lists.map(list => (
-          <Tab key={list.id} label={list.category} />
+        Object.keys(categories).map(item => (
+          <Tab key={categories[item].id} label={categories[item].category} />
         ))
       }
     </Tabs>
