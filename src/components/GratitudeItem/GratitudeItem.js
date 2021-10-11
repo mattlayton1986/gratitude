@@ -1,10 +1,21 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { ListItem, ListItemText, Box, Checkbox } from '@mui/material'
-import { toggleItemComplete } from '../../redux/gratitude/items/items.actions';
+import { 
+  ListItem, 
+  ListItemText, 
+  Box, 
+  Checkbox, 
+  IconButton 
+} from '@mui/material'
+import { 
+  toggleItemComplete, 
+  deleteGratitudeItem 
+} from '../../redux/gratitude/items/items.actions';
 import { 
   StarRounded as StarRoundedIcon, 
-  StarBorderRounded as StarBorderRoundedIcon 
+  StarBorderRounded as StarBorderRoundedIcon,
+  EditRounded as EditRoundedIcon,
+  DeleteRounded as DeleteRoundedIcon
 } from '@mui/icons-material';
 import { yellow } from '@mui/material/colors';
 import { makeStyles } from '@mui/styles'
@@ -26,6 +37,13 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(0, 2)
     },
   },
+  buttonGroup: {
+    display: 'flex',
+
+    '& .delete': {
+      color: theme.palette.error.light
+    }
+  }
 }))
 
 const personBoxStyles = {
@@ -43,6 +61,10 @@ const GratitudeItem = ({ item }) => {
     dispatch(toggleItemComplete(itemId))
   }
 
+  const handleDeleteItem = (itemId) => {
+    dispatch(deleteGratitudeItem(itemId))
+  }
+
   return (
     <ListItem 
       className={classes.listItem}
@@ -50,6 +72,7 @@ const GratitudeItem = ({ item }) => {
     >
       <Box sx={personBoxStyles}>
         <Checkbox 
+          disableRipple
           icon={<StarBorderRoundedIcon />}
           checkedIcon={<StarRoundedIcon />}
           checked={item.completed}
@@ -59,6 +82,19 @@ const GratitudeItem = ({ item }) => {
       </Box>
       <Box sx={{ width: '65%' }}>
         <ListItemText primary={item.gratitude} />
+      </Box>
+      <Box className={classes.buttonGroup}>
+        <IconButton className="edit" aria-label="edit" size="medium">
+          <EditRoundedIcon fontSize="inherit" />
+        </IconButton>
+        <IconButton 
+          className="delete" 
+          aria-label="delete" 
+          size="medium"
+          onClick={() => handleDeleteItem(item.id)}
+        >
+          <DeleteRoundedIcon fontSize="inherit" />
+        </IconButton>
       </Box>
     </ListItem>
   )

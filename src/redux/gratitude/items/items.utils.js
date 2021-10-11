@@ -18,6 +18,16 @@ export const addItemId = (itemIds, itemIdToAdd) => {
   return itemIds.concat(itemIdToAdd)
 }
 
+export const deleteItemItem = (itemsById, itemId) => {
+  let itemsCopy = Object.assign({}, itemsById)
+  delete itemsCopy[itemId]
+  return itemsCopy
+}
+
+export const deleteItemId = (itemIds, itemIdToDelete) => {
+  return itemIds.filter(item => item !== itemIdToDelete)
+}
+
 export const toggleComplete = (itemsById, itemId) => {
   
   return {

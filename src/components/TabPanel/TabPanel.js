@@ -7,7 +7,7 @@ const TabPanel = ({ children, value, index, ...otherProps }) => {
     <Container 
       role="tabpanel"
       hidden={value !== index}
-      maxWidth="md"
+      maxWidth="xl"
       {...otherProps}
     >
     {

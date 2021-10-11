@@ -3,7 +3,7 @@ import { TextField, Button, FormLabel } from '@mui/material'
 import CategoryField from '../CategoryField/CategoryField'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleModal, setTabValue } from '../../redux/application/application.actions'
-import { addGratitudeItem } from '../../redux/gratitude/gratitude.actions'
+import { addGratitudeItem } from '../../redux/gratitude/items/items.actions'
 import { selectAllCategories } from '../../redux/gratitude/categories/category.selectors'
 import uniqid from 'uniqid'
 import { makeStyles } from '@mui/styles'
@@ -96,10 +96,13 @@ const GratitudeForm = () => {
       itemId: uniqid()
     }))
 
+    const newItemTab = categoryIds.indexOf(categoryValue.title.toLowerCase())
+
+    console.log(newItemTab)
     // Change active tab to the category of newly-submitted item
-    dispatch(setTabValue( 
-      categoryIds.indexOf(categoryValue.title.toLowerCase())
-    ))
+    if (newItemTab >= 0) {
+      dispatch(setTabValue(newItemTab))
+    }
 
     handleClose()
   }

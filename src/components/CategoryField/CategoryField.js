@@ -3,6 +3,7 @@ import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete'
 import { TextField } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectCategoryNames } from '../../redux/gratitude/categories/category.selectors'
+import capitalize from 'lodash.capitalize'
 import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,7 @@ const CategoryField = ({ categoryValue, handleChange }) => {
   const categories = useSelector(selectCategoryNames)
 
   // Options needs to be an object with property 'title
-  const categoryOptions = categories.map(category => ({title: category})) 
+  const categoryOptions = categories.map(category => ({title: capitalize(category)})) 
 
 
   const filterCategories = (options, params) => {
