@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(4),
       boxShadow: theme.shadows[6],
       borderRadius: '10px',
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+        margin: `${theme.spacing(1)} auto`,
+        padding: theme.spacing(1)
+      },
     },
 
     '& .MuiListSubheader-root': {

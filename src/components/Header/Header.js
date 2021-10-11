@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
       padding: theme.spacing(0, 5),
       backgroundColor: theme.palette.common.white,
+      [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(0, 2)
+      }
     },
 
     '& .MuiButton-root': {

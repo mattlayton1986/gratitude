@@ -15,6 +15,7 @@ const ModalDialog = () => {
   
   return (
     <Dialog 
+      fullWidth
       open={modalOpen} 
       onClose={handleModalClose}
     >

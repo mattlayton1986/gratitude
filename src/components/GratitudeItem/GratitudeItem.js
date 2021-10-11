@@ -2,10 +2,13 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { 
   ListItem, 
-  ListItemText, 
+  ListItemText,
+  Container, 
   Box, 
   Checkbox, 
-  IconButton 
+  IconButton,
+  useMediaQuery,
+  useTheme
 } from '@mui/material'
 import { 
   toggleItemComplete, 
@@ -24,8 +27,25 @@ const useStyles = makeStyles((theme) => ({
   listItem: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     minHeight: '80px',
+
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2, 0)
+    },
+
+    '& .text-container': {
+      display: 'flex',
+      justifyContent: 'space-evenly',
+      [theme.breakpoints.down('sm')]: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'start',
+        '& .personText': {
+          fontStyle: 'italic',
+        },
+      }
+    },
 
     '& .MuiCheckbox-root': {
       color: theme.palette.grey[400],
@@ -46,16 +66,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const personBoxStyles = {
-  width: '35%', 
-  display: 'flex', 
-  justifyContent: 'center', 
-  alignItems: 'center'
-}
-
 const GratitudeItem = ({ item }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const theme = useTheme()
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'))
 
   const handleToggleCheckbox = (itemId) => {
     dispatch(toggleItemComplete(itemId))
@@ -69,20 +84,23 @@ const GratitudeItem = ({ item }) => {
     <ListItem 
       className={classes.listItem}
       divider
+      disableGutters={isSmall}
     >
-      <Box sx={personBoxStyles}>
-        <Checkbox 
-          disableRipple
-          icon={<StarBorderRoundedIcon />}
-          checkedIcon={<StarRoundedIcon />}
-          checked={item.completed}
-          onChange={() => handleToggleCheckbox(item.id)}
-        />
-        <ListItemText primary={item.person} />
-      </Box>
-      <Box sx={{ width: '65%' }}>
-        <ListItemText primary={item.gratitude} />
-      </Box>
+      <Checkbox 
+        disableRipple
+        icon={<StarBorderRoundedIcon />}
+        checkedIcon={<StarRoundedIcon />}
+        checked={item.completed}
+        onChange={() => handleToggleCheckbox(item.id)}
+      />
+      <Container className="text-container">
+        <Box sx={{ width: isSmall ? '100%' : '35%'}}>
+          <ListItemText className="personText" primary={item.person} />
+        </Box>
+        <Box sx={{ width: isSmall ? '100%' : '65%' }}>
+          <ListItemText primary={item.gratitude} />
+        </Box>
+      </Container>
       <Box className={classes.buttonGroup}>
         <IconButton className="edit" aria-label="edit" size="medium" disabled>
           <EditRoundedIcon fontSize="inherit" />

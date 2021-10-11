@@ -10,7 +10,7 @@ import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '50vw',
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -98,7 +98,6 @@ const GratitudeForm = () => {
 
     const newItemTab = categoryIds.indexOf(categoryValue.title.toLowerCase())
 
-    console.log(newItemTab)
     // Change active tab to the category of newly-submitted item
     if (newItemTab >= 0) {
       dispatch(setTabValue(newItemTab))
@@ -111,6 +110,7 @@ const GratitudeForm = () => {
     <form onSubmit={handleSubmit} className={classes.root}>
       <FormLabel component="legend">What are you grateful for?</FormLabel>
       <TextField 
+        autoFocus
         id="person"
         name="person"
         label="I am grateful to"
