@@ -84,7 +84,7 @@ const GratitudeItem = ({ item }) => {
         <ListItemText primary={item.gratitude} />
       </Box>
       <Box className={classes.buttonGroup}>
-        <IconButton className="edit" aria-label="edit" size="medium">
+        <IconButton className="edit" aria-label="edit" size="medium" disabled>
           <EditRoundedIcon fontSize="inherit" />
         </IconButton>
         <IconButton 
