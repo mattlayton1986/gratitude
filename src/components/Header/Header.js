@@ -44,7 +44,7 @@ const Header = () => {
     <AppBar position="static" color="transparent" className={classes.root}>
       <Toolbar disableGutters>
         <Typography variant="h6" component="h1" className={classes.title}>
-          gra@titude
+          gratitude
         </Typography>
         <Button variant="contained" onClick={handleButtonClick}>
           Add gratitude
